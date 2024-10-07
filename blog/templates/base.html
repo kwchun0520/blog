@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel = "stylesheet" href = "{% static 'css/style.css' %}">
+    <script src="{% static 'js/home.js' %}" defer></script>
+    {% block css %}{% endblock css %}
+</head>
+<body>
+    <nav>
+        <a href="/home">Home<span role="img",aria-label="home">&#127968</span></a> | <!-- instead of hard coding /posts/home, we want to use dynamic url using tag specified in url file-->
+        <a href="/about">About<span role="img",aria-label="about">&#128172</span></a> |
+        <a href="{% url 'posts:list' %}">Posts<span role="img",aria-label="posts">&#128220</span></a> |
+        {% if user.is_authenticated %}
+            <a href="{% url 'posts:new-post' %}">New Post<span role="img",aria-lable="new-post">&#128221</span></a> |
+            <form class="logout" action="{% url 'users:logout' %}" method="POST">
+                {% csrf_token %}
+                <button class="logout-button" aria-lablel="logout" title="Logout">Logout&#128683</button>
+            </form>
+        {% else %}
+            <a href="{% url 'users:login' %}">Login<span role="img",aria-lable="login">&#128477</span></a> |
+            <a href="{% url 'users:register' %}">Register<span role="img",aria-lable="register">&#128100</span></a>
+        {% endif %}
+    </nav>
+    {% block content %}{% endblock %}
+    <footer>
+        <a href="/google">Know More</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'posts/css/post_list.css' %}">
+{% endblock css %}
+{% block title %}
+    Posts List
+{% endblock title %}
+{% block content %}
+    <h1>Post List</h1>
+    <h2>Welcome! {{username|capfirst}}</h2> <!-- filter 'capfirst' for the variable, filter can be apply for more than one time -->
+    <section>
+    {% for post in posts %}
+        <article class="post">
+        <!--\{% if forloop.counter %\}--> <!-- start from 1, forloop.counter0 starts from 0, there are forloop.first, forloop.last etc-->
+            <a href="{% url 'posts:page' post.slug %}"> <!-- avoid hard coding /posts/{{post.id}}-->
+                <h2 >{{post.title}}</h2>
+            </a>
+            <p>{{post.date}} by {{post.author}}</p>
+            <p>{{post.body|truncatewords:10}}</p>
+        </article>
+    {% empty %}        <!-- similiar to \{% if %\} \{% else %\} \{% endif %\} -->
+        <h1>No Blog Posts Availalbe</h1>
+    {% endfor %}
+    </section>
+{% endblock content %}

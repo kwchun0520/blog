@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Home
+{% endblock title %}
+{% block content %}
+    <h1>Home</h1>
+    <img class="home-banner" src="/media/fallback.png" alt="img"/>
+    <h2>Welcome to my blog! {{username|capfirst}}</h2> <!-- filter 'capfirst' for the variable, filter can be apply for more than one time -->
+{% endblock content %}

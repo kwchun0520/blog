@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'posts/css/post_page.css' %}">
+{% endblock css %}
+{% block title %} 
+    {{post.title|capfirst}} 
+{% endblock title %}
+{% block content %}
+    <section>
+        <img class="banner" src="{{post.banner.url}}" alt="{{post.title}}"/>
+        <h2>{{post.title|capfirst}}</h2>
+        <p>{{post.date}} by {{post.author}}</p>
+        <p>{{post.body}}</p>
+    </section>
+{% endblock content %}
