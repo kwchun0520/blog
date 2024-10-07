@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'posts/css/post_new.css' %}">
+{% endblock css %}
+{% block title %} 
+    New Post
+{% endblock title %}
+{% block content %}
+    <section>
+       <h2>Create New Post</h2>
+       <form class="form-with-validation" action="{% url 'posts:new-post' %}" method="POST" enctype="multipart/form-data"></form>
+            {% csrf_token %}     
+            {{form}}
+            <button class="form-submit">Submit</button>
+       </form>
+    </section>
+{% endblock content %}
